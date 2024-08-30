@@ -10,8 +10,6 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "funcionario")
 @Data
-@PrimaryKeyJoinColumn(name = "id")
 public class Funcionario extends Pessoa {
         private String matricula;
-
 }

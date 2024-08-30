@@ -1,44 +1,51 @@
 package solutisdevtrail.desafiolocadoraveiculos.controller;
 
-import solutisdevtrail.desafiolocadoraveiculos.model.entity.Funcionario;
+import solutisdevtrail.desafiolocadoraveiculos.model.dto.FuncionarioDTO;
+
+
+
 import solutisdevtrail.desafiolocadoraveiculos.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/funcionarios")
+@RequestMapping("/api/funcionarios")
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @GetMapping
-    public List<Funcionario> findAll() {
-        return funcionarioService.findAll();
+    @PostMapping
+    public ResponseEntity<FuncionarioDTO> cadastrarFuncionario(@RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO novoFuncionario = funcionarioService.cadastrarFuncionario(funcionarioDTO);
+        return new ResponseEntity<>(novoFuncionario, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
-        Optional<Funcionario> funcionario = funcionarioService.findById(id);
-        if (funcionario.isPresent()) {
-            return ResponseEntity.ok(funcionario.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<FuncionarioDTO> buscarFuncionarioPorId(@PathVariable Long id) {
+        FuncionarioDTO funcionario = funcionarioService.buscarFuncionarioPorId(id);
+        return ResponseEntity.ok(funcionario);
     }
 
-    @PostMapping
-    public Funcionario save(@RequestBody Funcionario funcionario) {
-        return funcionarioService.save(funcionario);
+    @GetMapping
+    public ResponseEntity<List<FuncionarioDTO>> listarTodosFuncionarios() {
+        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodosFuncionarios();
+        return ResponseEntity.ok(funcionarios);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionarioDTO> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO funcionarioAtualizado = funcionarioService.atualizarFuncionario(id, funcionarioDTO);
+        return ResponseEntity.ok(funcionarioAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        funcionarioService.deleteById(id);
+    public ResponseEntity<Void> deletarFuncionario(@PathVariable Long id) {
+        funcionarioService.deletarFuncionario(id);
         return ResponseEntity.noContent().build();
     }
 }
