@@ -5,9 +5,6 @@ import lombok.Data;
 
 import java.util.Date;
 @Data
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-
 @MappedSuperclass
 public abstract class Pessoa {
     @Id
