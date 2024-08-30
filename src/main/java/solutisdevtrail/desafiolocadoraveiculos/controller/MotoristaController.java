@@ -1,5 +1,6 @@
 package solutisdevtrail.desafiolocadoraveiculos.controller;
 
+import solutisdevtrail.desafiolocadoraveiculos.model.entity.Motorista;
 import solutisdevtrail.desafiolocadoraveiculos.service.MotoristaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

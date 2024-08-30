@@ -1,5 +1,6 @@
 package solutisdevtrail.desafiolocadoraveiculos.service;
 
+import solutisdevtrail.desafiolocadoraveiculos.model.entity.Motorista;
 import solutisdevtrail.desafiolocadoraveiculos.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
