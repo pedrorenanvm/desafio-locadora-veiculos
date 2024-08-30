@@ -7,7 +7,9 @@ import java.util.Date;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa {
+
+@MappedSuperclass
+public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
