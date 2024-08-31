@@ -8,7 +8,7 @@ public record ApoliceDTO(Long id, BigDecimal valorFranquia, boolean protecaoTerc
                          boolean protecaoCausasNaturais, boolean protecaoRoubo) {
     public ApoliceDTO(ApoliceSeguro apoliceSeguro) {
         this(apoliceSeguro.getId(), apoliceSeguro.getValorFranquia(),
-                apoliceSeguro.isProtecaoTerceiro(), apoliceSeguro.isProtecaoCausasNaturais(),
-                apoliceSeguro.isProtecaoRoubo());
+                apoliceSeguro.getProtecaoTerceiro(), apoliceSeguro.getProtecaoCausasNaturais(),
+                apoliceSeguro.getProtecaoRoubo());
     }
 }

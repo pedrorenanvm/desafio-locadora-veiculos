@@ -19,9 +19,9 @@ public class Aluguel {
     private Date dataDevolucao;
     private BigDecimal valorTotal;
 
-//    @ManyToOne
-//    @JoinColumn(name = "carro_id")
-//    private Carro carro;
+    @ManyToOne
+    @JoinColumn(name = "carro_id")
+    private Carro carro;
 
     @ManyToOne
     @JoinColumn(name = "motorista_id")
