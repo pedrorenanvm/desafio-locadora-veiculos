@@ -38,6 +38,8 @@ public class CarroService {
     }
 
     public CarroDTO save(CarroDTO carroDTO) {
+        verificarDuplicidade(carroDTO);
+
         Carro carro = new Carro();
         ModeloCarro modelo = modeloCarroRepository.findById(carroDTO.modelo_id())
                 .orElseThrow(() -> new ResourceNotFoundException("Modelo não encontrado com ID: " + carroDTO.modelo_id()));
@@ -58,6 +60,20 @@ public class CarroService {
     public CarroDTO update(Long id, CarroDTO carroDTO) {
         Carro carro = carroRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Carro não encontrado para o ID: " + id));
+
+        // Verifica se o chassi ou a placa já estão em uso por outro carro
+        if (!carro.getChassi().equals(carroDTO.chassi())) {
+            carroRepository.findByChassi(carroDTO.chassi()).ifPresent(c -> {
+                throw new IllegalArgumentException("Chassi já cadastrado para outro carro.");
+            });
+        }
+
+        if (!carro.getPlaca().equals(carroDTO.placa())) {
+            carroRepository.findByPlaca(carroDTO.placa()).ifPresent(c -> {
+                throw new IllegalArgumentException("Placa já cadastrada para outro carro.");
+            });
+        }
+
         ModeloCarro modelo = modeloCarroRepository.findById(carroDTO.modelo_id())
                 .orElseThrow(() -> new ResourceNotFoundException("Modelo não encontrado com ID: " + carroDTO.modelo_id()));
 
@@ -78,5 +94,15 @@ public class CarroService {
         Carro carro = carroRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Carro não encontrado para o ID: " + id));
         carroRepository.deleteById(id);
+    }
+
+    private void verificarDuplicidade(CarroDTO carroDTO) {
+        carroRepository.findByChassi(carroDTO.chassi()).ifPresent(c -> {
+            throw new IllegalArgumentException("Chassi já cadastrado para outro carro.");
+        });
+
+        carroRepository.findByPlaca(carroDTO.placa()).ifPresent(c -> {
+            throw new IllegalArgumentException("Placa já cadastrada para outro carro.");
+        });
     }
 }
