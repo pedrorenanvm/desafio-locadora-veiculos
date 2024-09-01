@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import solutisdevtrail.desafiolocadoraveiculos.exception.ResourceNotFoundException;
 import solutisdevtrail.desafiolocadoraveiculos.model.dto.CarroDTO;
+import solutisdevtrail.desafiolocadoraveiculos.model.dto.CarroResponseDTO;
 import solutisdevtrail.desafiolocadoraveiculos.model.entity.Carro;
 import solutisdevtrail.desafiolocadoraveiculos.model.entity.ModeloCarro;
 import solutisdevtrail.desafiolocadoraveiculos.model.entity.Acessorio;
@@ -27,14 +28,14 @@ public class CarroService {
     @Autowired
     private AcessorioRepository acessorioRepository;
 
-    public List<CarroDTO> findAll() {
-        return carroRepository.findAll().stream().map(CarroDTO::new).toList();
+    public List<CarroResponseDTO> findAll() {
+        return carroRepository.findAll().stream().map(CarroResponseDTO::new).toList();
     }
 
-    public CarroDTO findById(Long id) {
+    public CarroResponseDTO findById(Long id) {
         Carro carro = carroRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Carro não encontrado com ID: " + id));
-        return new CarroDTO(carro);
+        return new CarroResponseDTO(carro);
     }
 
     public CarroDTO save(CarroDTO carroDTO) {

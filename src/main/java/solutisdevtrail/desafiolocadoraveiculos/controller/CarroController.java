@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import solutisdevtrail.desafiolocadoraveiculos.model.dto.CarroDTO;
+import solutisdevtrail.desafiolocadoraveiculos.model.dto.CarroResponseDTO;
 import solutisdevtrail.desafiolocadoraveiculos.model.entity.Carro;
 import solutisdevtrail.desafiolocadoraveiculos.service.CarroService;
 
@@ -19,13 +20,14 @@ public class CarroController {
     private CarroService carroService;
 
     @GetMapping
-    public ResponseEntity<List<CarroDTO>>findAll(){
-       List<CarroDTO> carros = carroService.findAll();
-       return ResponseEntity.ok(carros);
+    public ResponseEntity<List<CarroResponseDTO>> findAll() {
+        List<CarroResponseDTO> carros = carroService.findAll();
+        return ResponseEntity.ok(carros);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<CarroDTO> findById(@PathVariable long id){
-        CarroDTO carro = carroService.findById(id);
+    public ResponseEntity<CarroResponseDTO> findById(@PathVariable long id) {
+        CarroResponseDTO carro = carroService.findById(id);
         return ResponseEntity.ok(carro);
     }
     @PostMapping
