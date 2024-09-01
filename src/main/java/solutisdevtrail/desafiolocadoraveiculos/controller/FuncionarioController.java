@@ -1,9 +1,6 @@
 package solutisdevtrail.desafiolocadoraveiculos.controller;
 
 import solutisdevtrail.desafiolocadoraveiculos.model.dto.FuncionarioDTO;
-
-
-
 import solutisdevtrail.desafiolocadoraveiculos.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

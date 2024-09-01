@@ -14,9 +14,9 @@ public class ApoliceSeguro {
     private Long id;
 
     private BigDecimal valorFranquia;
-    private boolean protecaoTerceiro;
-    private boolean protecaoCausasNaturais;
-    private boolean protecaoRoubo;
+    private Boolean protecaoTerceiro;
+    private Boolean protecaoCausasNaturais;
+    private Boolean protecaoRoubo;
 
     //@OneToOne(mappedBy = "apolice")
     //private Aluguel aluguel;
