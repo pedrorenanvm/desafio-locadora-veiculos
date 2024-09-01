@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MotoristaService {
@@ -27,17 +26,22 @@ public class MotoristaService {
     }
 
     public MotoristaDTO save(MotoristaDTO motoristaDTO) {
+        validarCamposObrigatorios(motoristaDTO);
+
         Motorista motorista = new Motorista();
         motorista.setName(motoristaDTO.name());
         motorista.setDataNascimento(motoristaDTO.dataNascimento());
         motorista.setCpf(motoristaDTO.cpf());
         motorista.setNumeroCNH(motoristaDTO.numeroCNH());
+        motorista.setSexo(motoristaDTO.sexo());
 
         motorista = motoristaRepository.save(motorista);
         return new MotoristaDTO(motorista);
     }
 
     public MotoristaDTO update(Long id, MotoristaDTO motoristaDTO) {
+        validarCamposObrigatorios(motoristaDTO);
+
         Motorista motorista = motoristaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Motorista não encontrado com ID: " + id));
 
@@ -45,6 +49,7 @@ public class MotoristaService {
         motorista.setDataNascimento(motoristaDTO.dataNascimento());
         motorista.setCpf(motoristaDTO.cpf());
         motorista.setNumeroCNH(motoristaDTO.numeroCNH());
+        motorista.setSexo(motoristaDTO.sexo());
 
         motorista = motoristaRepository.save(motorista);
         return new MotoristaDTO(motorista);
@@ -54,5 +59,15 @@ public class MotoristaService {
         Motorista motorista = motoristaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Motorista não encontrado com ID: " + id));
         motoristaRepository.deleteById(id);
+    }
+
+    private void validarCamposObrigatorios(MotoristaDTO motoristaDTO) {
+        if (motoristaDTO.name() == null || motoristaDTO.name().isEmpty() ||
+                motoristaDTO.dataNascimento() == null ||
+                motoristaDTO.cpf() == null || motoristaDTO.cpf().isEmpty() ||
+                motoristaDTO.numeroCNH() == null || motoristaDTO.numeroCNH().isEmpty() ||
+                motoristaDTO.sexo() == null) {
+            throw new IllegalArgumentException("Todos os campos são obrigatórios.");
+        }
     }
 }

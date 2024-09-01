@@ -10,4 +10,3 @@ public enum Categoria {
     ESPORTIVO,
     UTILITARIO_COMERCIAL
 }
-

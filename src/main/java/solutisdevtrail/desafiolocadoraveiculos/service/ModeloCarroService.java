@@ -2,9 +2,9 @@ package solutisdevtrail.desafiolocadoraveiculos.service;
 
 import solutisdevtrail.desafiolocadoraveiculos.exception.ResourceNotFoundException;
 import solutisdevtrail.desafiolocadoraveiculos.model.dto.ModeloCarroDTO;
+import solutisdevtrail.desafiolocadoraveiculos.model.entity.ModeloCarro;
 import solutisdevtrail.desafiolocadoraveiculos.model.entity.Categoria;
 import solutisdevtrail.desafiolocadoraveiculos.model.entity.Fabricante;
-import solutisdevtrail.desafiolocadoraveiculos.model.entity.ModeloCarro;
 import solutisdevtrail.desafiolocadoraveiculos.repository.ModeloCarroRepository;
 import solutisdevtrail.desafiolocadoraveiculos.repository.FabricanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

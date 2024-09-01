@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
+
 @Data
 @Entity
 public class Carro {
@@ -29,5 +31,5 @@ public class Carro {
             name = "carro_acessorio",
             joinColumns = @JoinColumn(name = "carro_id"),
             inverseJoinColumns = @JoinColumn(name = "acessorio_id"))
-    private List<Acessorio> acessorios;
+    private Set<Acessorio> acessorios;
 }
