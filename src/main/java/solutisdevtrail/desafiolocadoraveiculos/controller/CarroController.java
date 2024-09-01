@@ -12,7 +12,7 @@ import solutisdevtrail.desafiolocadoraveiculos.service.CarroService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/carro")
+@RequestMapping("/carros")
 public class CarroController {
 
     @Autowired
