@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 @RestController
@@ -16,10 +18,10 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @PostMapping
-    public ResponseEntity<FuncionarioDTO> cadastrarFuncionario(@RequestBody FuncionarioDTO funcionarioDTO) {
-        FuncionarioDTO novoFuncionario = funcionarioService.cadastrarFuncionario(funcionarioDTO);
-        return new ResponseEntity<>(novoFuncionario, HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<FuncionarioDTO>> listarTodosFuncionarios() {
+        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodosFuncionarios();
+        return ResponseEntity.ok(funcionarios);
     }
 
     @GetMapping("/{id}")
@@ -28,10 +30,16 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionario);
     }
 
-    @GetMapping
-    public ResponseEntity<List<FuncionarioDTO>> listarTodosFuncionarios() {
-        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodosFuncionarios();
-        return ResponseEntity.ok(funcionarios);
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> cadastrarFuncionario(@RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO novoFuncionario = funcionarioService.cadastrarFuncionario(funcionarioDTO);
+
+        // Cria uma resposta que inclui uma mensagem e os detalhes do funcionário
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Funcionário cadastrado com sucesso");
+        response.put("funcionario", novoFuncionario);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

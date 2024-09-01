@@ -1,6 +1,12 @@
 package solutisdevtrail.desafiolocadoraveiculos.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,7 +20,12 @@ public abstract class Pessoa {
 
     private String name;
     private Date dataNascimento;
+
+    @Column(unique = true)
     private String cpf;
+
+    @Column(unique = true)
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
