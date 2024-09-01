@@ -23,6 +23,12 @@ public class Carro {
     private String cor;
     private BigDecimal valorDiaria;
 
+    @Column(length = 500)
+    private String especificacoesTecnicas;
+
+    @Column(length = 250)
+    private String descricao;
+
     @OneToMany(mappedBy = "carro")
     private List<Aluguel> alugueis;
 

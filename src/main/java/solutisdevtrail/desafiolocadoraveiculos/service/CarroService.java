@@ -52,6 +52,8 @@ public class CarroService {
         carro.setPlaca(carroDTO.placa());
         carro.setModelo(modelo);
         carro.setValorDiaria(carroDTO.valorDiaria());
+        carro.setEspecificacoesTecnicas(carroDTO.especificacoesTecnicas());
+        carro.setDescricao(carroDTO.descricao());
         carro.setAcessorios(acessorios);
 
         carro = carroRepository.save(carro);
@@ -62,7 +64,6 @@ public class CarroService {
         Carro carro = carroRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Carro não encontrado para o ID: " + id));
 
-        // Verifica se o chassi ou a placa já estão em uso por outro carro
         if (!carro.getChassi().equals(carroDTO.chassi())) {
             carroRepository.findByChassi(carroDTO.chassi()).ifPresent(c -> {
                 throw new IllegalArgumentException("Chassi já cadastrado para outro carro.");
@@ -85,6 +86,8 @@ public class CarroService {
         carro.setPlaca(carroDTO.placa());
         carro.setModelo(modelo);
         carro.setValorDiaria(carroDTO.valorDiaria());
+        carro.setEspecificacoesTecnicas(carroDTO.especificacoesTecnicas());
+        carro.setDescricao(carroDTO.descricao());
         carro.setAcessorios(acessorios);
 
         carro = carroRepository.save(carro);

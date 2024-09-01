@@ -34,7 +34,6 @@ public class MotoristaController {
     public ResponseEntity<Map<String, Object>> save(@RequestBody MotoristaDTO motoristaDTO) {
         MotoristaDTO novoMotorista = motoristaService.save(motoristaDTO);
 
-        // Cria uma resposta que inclui uma mensagem e os detalhes do motorista
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Motorista cadastrado com sucesso");
         response.put("motorista", novoMotorista);
