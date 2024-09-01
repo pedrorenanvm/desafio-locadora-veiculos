@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 @RestController
@@ -29,9 +31,15 @@ public class MotoristaController {
     }
 
     @PostMapping
-    public ResponseEntity<MotoristaDTO> save(@RequestBody MotoristaDTO motoristaDTO) {
+    public ResponseEntity<Map<String, Object>> save(@RequestBody MotoristaDTO motoristaDTO) {
         MotoristaDTO novoMotorista = motoristaService.save(motoristaDTO);
-        return new ResponseEntity<>(novoMotorista, HttpStatus.CREATED);
+
+        // Cria uma resposta que inclui uma mensagem e os detalhes do motorista
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Motorista cadastrado com sucesso");
+        response.put("motorista", novoMotorista);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
