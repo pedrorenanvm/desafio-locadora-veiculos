@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record CarroResponseDTO(Long id, String placa, String chassi, String cor, BigDecimal valorDiaria,
+                               String especificacoesTecnicas, String descricao,
                                String modeloDescricao, String modeloCategoria,
                                List<String> acessoriosDescricoes) {
 
@@ -18,6 +19,8 @@ public record CarroResponseDTO(Long id, String placa, String chassi, String cor,
                 carro.getChassi(),
                 carro.getCor(),
                 carro.getValorDiaria(),
+                carro.getEspecificacoesTecnicas(),
+                carro.getDescricao(),
                 carro.getModelo().getDescricao(),
                 carro.getModelo().getCategoria().name(),
                 carro.getAcessorios().stream()
