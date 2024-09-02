@@ -30,8 +30,5 @@ public class Aluguel {
     @OneToOne
     @JoinColumn(name = "apolice_id")
     private ApoliceSeguro apolice;
-
-    @ManyToOne
-    @JoinColumn(name = "carrinho_id")
-    private Carrinho carrinho;
+    
 }
